@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.library</groupId>
-	<artifactId>Library_Spring</artifactId>
+	<artifactId>library_spring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Library_Spring</name>
+	<name>library_spring</name>
 	<description>Demo library project for Spring Boot</description>
 	<url/>
 	<licenses>

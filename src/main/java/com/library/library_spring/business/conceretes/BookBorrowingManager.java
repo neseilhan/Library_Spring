@@ -45,12 +45,15 @@ public class BookBorrowingManager implements IBookBorrowingService {
 
     @Override
     public BookBorrowing update(BookBorrowing bookBorrowing) {
-        BookBorrowing existingBookBorrowing = get(bookBorrowing.getId());
-        existingBookBorrowing.setBook(bookBorrowing.getBook());
-        existingBookBorrowing.setName(bookBorrowing.getName());
-        existingBookBorrowing.setBorrowingDate(bookBorrowing.getBorrowingDate());
-        existingBookBorrowing.setReturn_date(bookBorrowing.getReturn_date());
-        return bookBorrowingRepo.save(existingBookBorrowing);
+//        BookBorrowing existingBookBorrowing = get(bookBorrowing.getId());
+//        existingBookBorrowing.setBook(bookBorrowing.getBook());
+//        existingBookBorrowing.setName(bookBorrowing.getName());
+//        existingBookBorrowing.setBorrowingDate(bookBorrowing.getBorrowingDate());
+//        existingBookBorrowing.setReturn_date(bookBorrowing.getReturn_date());
+//        return bookBorrowingRepo.save(existingBookBorrowing);
+
+        this.get(bookBorrowing.getId());
+        return this.bookBorrowingRepo.save(bookBorrowing);
     }
 
     @Override

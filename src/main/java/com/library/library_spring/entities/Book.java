@@ -51,7 +51,9 @@ public class Book {
     )
     private List<Category> categoryList;
 
-    public List<Category> getCategories() {
-        return categoryList != null ? categoryList : Collections.emptyList();
-    }
+//    public List<Category> getCategories() {
+//        return categoryList != null ? categoryList : Collections.emptyList();
+//    }
+
+
 }

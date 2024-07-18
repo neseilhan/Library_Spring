@@ -10,14 +10,16 @@ import com.library.library_spring.core.modelMaper.IModelMapperService;
 import com.library.library_spring.dto.CategoryResponse;
 import com.library.library_spring.dto.CategorySaveRequest;
 import com.library.library_spring.dto.CategoryUpdateRequest;
+import com.library.library_spring.dto.CursorResponse;
 import com.library.library_spring.entities.Category;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/categories")
+@RequestMapping("/api/categories")
 public class CategoryController {
     private final ICategoryService categoryService;
     private final IModelMapperService modelMapper;
@@ -65,6 +67,21 @@ public class CategoryController {
         CategoryResponse categoryResponse = this.modelMapper.forResponse().map(updateCategory, CategoryResponse.class);
         return ResultHelper.success(categoryResponse);
     }
+
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public ResultData<CursorResponse<CategoryResponse>> cursor(
+            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "2") int pageSize
+    ){
+
+        Page<Category> categoryPage = this.categoryService.cursor(page,pageSize);
+        Page<CategoryResponse> categoryResponsePage = categoryPage
+                .map(category -> this.modelMapper.forResponse().map(category, CategoryResponse.class));
+
+        return ResultHelper.cursor(categoryResponsePage);
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable int id) {

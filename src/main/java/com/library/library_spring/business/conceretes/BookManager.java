@@ -28,7 +28,7 @@ public class BookManager implements IBookService {
     @Override
     public Book save(Book book) {
         Book savedBook = this.bookRepo.save(book);
-        for (Category category : book.getCategories()) {
+        for (Category category : book.getCategoryList()) {
             category.getBookList().add(savedBook);
             categoryRepo.save(category);
         }

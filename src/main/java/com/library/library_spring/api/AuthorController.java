@@ -7,17 +7,17 @@ import com.library.library_spring.core.Result.ResultHelper;
 import com.library.library_spring.core.config.Msg;
 import com.library.library_spring.core.exception.NotFoundException;
 import com.library.library_spring.core.modelMaper.IModelMapperService;
-import com.library.library_spring.dto.AuthorResponse;
-import com.library.library_spring.dto.AuthorSaveRequest;
-import com.library.library_spring.dto.AuthorUpdateRequest;
+import com.library.library_spring.dto.*;
 import com.library.library_spring.entities.Author;
+import com.library.library_spring.entities.Book;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/authors")
+@RequestMapping("/api/authors")
 public class AuthorController {
 
     private final IAuthorService authorService;
@@ -40,6 +40,21 @@ public class AuthorController {
 
     }
 
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public ResultData<CursorResponse<AuthorResponse>> cursor(
+            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "2") int pageSize
+    ){
+
+        Page<Author> authorPage = this.authorService.cursor(page,pageSize);
+        Page<AuthorResponse> authorResponsePage = authorPage
+                .map(book -> this.modelMapper.forResponse().map(book, AuthorResponse.class));
+
+        return ResultHelper.cursor(authorResponsePage);
+    }
+
+
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public ResultData<AuthorResponse> save(@Valid @RequestBody AuthorSaveRequest authorSaveRequest) {
@@ -54,7 +69,8 @@ public class AuthorController {
 //        }
     }
 
-    @PutMapping("/{id}")
+
+    @PutMapping()
     @ResponseStatus(HttpStatus.OK)
     public ResultData<AuthorResponse> update(@PathVariable("id") int id, @Valid @RequestBody AuthorUpdateRequest authorUpdateRequest) {
 

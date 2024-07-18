@@ -11,6 +11,14 @@ import java.util.List;
 @NoArgsConstructor
 public class CursorResponse<T> {
 
+    private int pageNumber;
+
+    private int pageSize;
+
+    private long totalElements;
+
+    private List<T> items;
+
     public int getPageNumber() {
         return pageNumber;
     }
@@ -43,8 +51,4 @@ public class CursorResponse<T> {
         this.items = items;
     }
 
-    private int pageNumber;
-    private int pageSize;
-    private long totalElements;
-    private List<T> items;
 }

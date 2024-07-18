@@ -3,7 +3,7 @@ package com.library.library_spring.business.abstracts;
 import com.library.library_spring.entities.Author;
 import org.springframework.data.domain.Page;
 
-public interface IAuthortService {
+public interface IAuthorService {
     Author save(Author author);
 
     Author get(int id);

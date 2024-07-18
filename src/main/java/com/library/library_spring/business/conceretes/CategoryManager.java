@@ -7,11 +7,14 @@ import com.library.library_spring.core.exception.CategoryNotFoundException;
 import com.library.library_spring.core.exception.NotFoundException;
 import com.library.library_spring.dao.BookRepo;
 import com.library.library_spring.dao.CategoryRepo;
+import com.library.library_spring.entities.Book;
 import com.library.library_spring.entities.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CategoryManager implements ICategoryService {
@@ -31,7 +34,7 @@ public class CategoryManager implements ICategoryService {
 
     @Override
     public Category get(int id) {
-        return this.categoryRepo.findById(id).orElseThrow(() -> new NotFoundException(Msg.NOT_FOUND));
+        return this.categoryRepo.findById(id).orElseThrow(() -> new CategoryNotFoundException(Msg.NOT_FOUND));
     }
 
     @Override
@@ -48,11 +51,13 @@ public class CategoryManager implements ICategoryService {
 
     @Override
     public String delete(int id) {
-        Category category = get(id);
-        if (bookRepo.existsByCategoryId(id)) {
+        List<Book> books = bookRepo.findByCategoryId(id);
+        if (!books.isEmpty()) {
             return Msg.CATEGORY_DELETE_ERROR;
         }
-        categoryRepo.deleteById(id);
+        // Kategori sil
+        Category category = this.get(id);
+        this.categoryRepo.delete(category);
         return Msg.OK;
     }
 

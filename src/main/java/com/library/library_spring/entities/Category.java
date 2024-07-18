@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "category")
@@ -24,7 +24,38 @@ public class Category {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany(mappedBy = "categorySet")
-    private Set<Book> bookSet;
+    @ManyToMany(mappedBy = "categoryList")
+    private List<Book> bookList;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
+    }
 }

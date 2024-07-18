@@ -1,8 +1,9 @@
 package com.library.library_spring.business.abstracts;
 
 import com.library.library_spring.entities.Book;
-import com.library.library_spring.entities.BookBorrowing;
 import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 public interface IBookService {
     Book save(Book book);
@@ -14,4 +15,6 @@ public interface IBookService {
     Page<Book> cursor(int page, int pageSize);
 
     boolean delete(int id);
+
+
 }

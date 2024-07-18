@@ -1,13 +1,19 @@
 package com.library.library_spring.api;
 
 import com.library.library_spring.business.abstracts.ICategoryService;
+import com.library.library_spring.core.Result.Result;
 import com.library.library_spring.core.Result.ResultData;
+import com.library.library_spring.core.Result.ResultHelper;
+import com.library.library_spring.core.config.Msg;
+import com.library.library_spring.core.exception.CategoryNotFoundException;
 import com.library.library_spring.core.modelMaper.IModelMapperService;
 import com.library.library_spring.dto.CategoryResponse;
 import com.library.library_spring.dto.CategorySaveRequest;
+import com.library.library_spring.dto.CategoryUpdateRequest;
 import com.library.library_spring.entities.Category;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -42,4 +48,34 @@ public class CategoryController {
         CategoryResponse categoryResponse = this.modelMapper.forResponse().map(saveCategory, CategoryResponse.class);
         return new ResultData<>("201", "Veri eklendi.",true , categoryResponse);
     }
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResultData<CategoryResponse> get(@PathVariable("id") int id) {
+        Category category = this.categoryService.get(id);
+        CategoryResponse categoryResponse = this.modelMapper.forResponse().map(category, CategoryResponse.class);
+        return ResultHelper.success(categoryResponse);
+    }
+
+    @PutMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public ResultData<CategoryResponse> update(@Valid @RequestBody CategoryUpdateRequest categoryUpdateRequest) {
+        Category updateCategory = this.modelMapper.forRequest().map(categoryUpdateRequest, Category.class);
+        this.categoryService.update(updateCategory);
+        CategoryResponse categoryResponse = this.modelMapper.forResponse().map(updateCategory, CategoryResponse.class);
+        return ResultHelper.success(categoryResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable int id) {
+        try {
+            categoryService.delete(id);
+            return ResponseEntity.ok(Msg.OK);
+        } catch (CategoryNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Msg.CATEGORY_DELETE_ERROR);
+        }
+    }
+
+
 }

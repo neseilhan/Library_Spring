@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -48,5 +49,9 @@ public class Book {
             joinColumns = { @JoinColumn(name = "book_id") },
             inverseJoinColumns = { @JoinColumn(name = "category_id") }
     )
-    private Set<Category> categorySet;
+    private List<Category> categoryList;
+
+    public List<Category> getCategories() {
+        return categoryList != null ? categoryList : Collections.emptyList();
+    }
 }

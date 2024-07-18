@@ -12,5 +12,5 @@ public interface ICategoryService {
 
     Page<Category> cursor(int page, int pageSize);
 
-    boolean delete(int id);
+    String delete(int id);
 }

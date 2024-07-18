@@ -17,8 +17,22 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(InsufficientStockException.class)
+    public ResponseEntity<Result> handleInsufficientStockException(InsufficientStockException e){
+        return new ResponseEntity<>(ResultHelper.insufficientStockError(e.getMessage()), HttpStatus.INSUFFICIENT_STORAGE);
+    }
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Result> handleNotFoundException(NotFoundException e){
+        return new ResponseEntity<>(ResultHelper.notFoundError(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(BookNotFoundException.class)
+    public ResponseEntity<Result> handleBookNotFoundException(BookNotFoundException e){
+        return new ResponseEntity<>(ResultHelper.notFoundError(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<Result> handleCategoryNotFoundException(CategoryNotFoundException e){
         return new ResponseEntity<>(ResultHelper.notFoundError(e.getMessage()), HttpStatus.NOT_FOUND);
     }
 

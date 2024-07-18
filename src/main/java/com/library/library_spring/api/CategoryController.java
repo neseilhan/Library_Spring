@@ -48,6 +48,7 @@ public class CategoryController {
         CategoryResponse categoryResponse = this.modelMapper.forResponse().map(saveCategory, CategoryResponse.class);
         return new ResultData<>("201", "Veri eklendi.",true , categoryResponse);
     }
+
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResultData<CategoryResponse> get(@PathVariable("id") int id) {

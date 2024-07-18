@@ -6,6 +6,9 @@ import org.springframework.data.domain.Page;
 
 public class ResultHelper {
 
+    public static Result insufficientStockError(String msg) {
+        return new Result("409", Msg.INSUFFICIENT_STOCK, false);
+    }
     public static <T> ResultData<T> created(T data){
         return new ResultData<>("201", Msg.CREATED,true , data);
     }

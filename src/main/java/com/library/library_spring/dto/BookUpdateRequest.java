@@ -13,7 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookUpdateRequest {
-
     @Positive(message = "ID değeri pozitif sayı olmak zorunda")
     private int Id;
 

@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PublisherUpdateRequest {
-
     @Positive(message = "ID değeri pozitif sayı olmak zorunda")
     private int publisherId;
 

@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PublisherSaveRequest {
-
     @NotNull(message= "Yayinci adi bos veya null olamaz")
     @NotEmpty
     private String name;

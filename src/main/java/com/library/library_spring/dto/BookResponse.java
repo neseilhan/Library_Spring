@@ -11,7 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookResponse {
-
     private int id;
 
     private String bookName;

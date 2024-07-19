@@ -11,12 +11,14 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthorSaveRequest {
-    @NotNull(message= "Yazar adi bos veya null olamaz")
+public class BookBorrowingSaveRequest {
+    @NotNull(message= "İsim alani bos veya null olamaz")
     @NotEmpty
     private String name;
 
-    private LocalDate birthDate; //String degil LocalDate yapıldı.
+    private LocalDate borrowingDate;
 
-    private String country;
+    private LocalDate returnDate;
+
+    private int bookId;
 }

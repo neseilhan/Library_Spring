@@ -12,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookSaveRequest {
-
     @NotNull(message= "Kitap adi bos veya null olamaz")
     @NotEmpty
     private String name;

@@ -6,24 +6,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class BookSaveRequest {
+@AllArgsConstructor
+public class PublisherSaveRequest {
 
-    @NotNull(message= "Kitap adi bos veya null olamaz")
+    @NotNull(message= "Yayinci adi bos veya null olamaz")
     @NotEmpty
     private String name;
 
-    private String publicationYear;
+    private String establishmentYear;
 
-    private int stock;
+    private String address;
 
-    private int authorId;
-
-    private int publisherId;
-
-    private List<Integer> categoryId;
 }

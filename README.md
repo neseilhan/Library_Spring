@@ -1,4 +1,4 @@
-# Book Borrowing Management System
+# Book Borrowing Management System API
 
 RestApi program of a book borrowing management that has authors, categories, publishers and book borrowings of the books, and crud transactions can be performed with them. 
 If there are books registered in the system belonging to the category to be deleted, the deletion process will not take place. If the book to be borrowed is not in stock, it cannot be borrowed.
